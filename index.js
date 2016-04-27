@@ -2,11 +2,14 @@
 * @Author: zyc
 * @Date:   2016-04-25 15:42:54
 * @Last Modified by:   zyc
-* @Last Modified time: 2016-04-27 02:40:18
+* @Last Modified time: 2016-04-27 17:30:24
 */
 'use strict'
 
 const request = require('sync-request')
+
+const Item = require('./lib/item')
+const Order = require('./lib/order')
 
 const base = 'https://api.vdian.com/'
 
@@ -53,5 +56,13 @@ module.exports = class {
     const { result, status } = json
     if (!status.status_code) return result
     throw `${status.status_code}：${status.status_reason}`
+  }
+
+  get item() {
+    return new Item(this)
+  }
+
+  get order() {
+    return new Order(this)
   }
 }
