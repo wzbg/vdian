@@ -1,0 +1,28 @@
+{
+  "name": "vdian",
+  "version": "0.0.2",
+  "description": "微店 非官方 SDK for node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --harmony_destructuring test"
+  },
+  "author": {
+    "name": "wzbg",
+    "email": "z3530515@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wzbg/vdian"
+  },
+  "keywords": [
+    "weidian",
+    "vdian",
+    "open",
+    "api",
+    "微店"
+  ],
+  "dependencies": {
+    "sync-request": "^3.0.0"
+  }
+}
