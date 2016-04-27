@@ -2,14 +2,17 @@
 * @Author: zyc
 * @Date:   2016-04-25 15:42:54
 * @Last Modified by:   zyc
-* @Last Modified time: 2016-04-27 17:30:24
+* @Last Modified time: 2016-04-28 03:29:51
 */
 'use strict'
 
 const request = require('sync-request')
 
-const Item = require('./lib/item')
-const Order = require('./lib/order')
+const Item = require('./lib/item')       // 商品API
+const Order = require('./lib/order')     // 订单API
+const Seckill = require('./lib/seckill') // 限时折扣商品 API
+const Coupon = require('./lib/coupon')   // 店铺优惠券 API
+const Cps = require('./lib/cps')         // CPS API
 
 const base = 'https://api.vdian.com/'
 
@@ -58,11 +61,9 @@ module.exports = class {
     throw `${status.status_code}：${status.status_reason}`
   }
 
-  get item() {
-    return new Item(this)
-  }
-
-  get order() {
-    return new Order(this)
-  }
+  get item() { return new Item(this) }
+  get order() { return new Order(this) }
+  get seckill() { return new Seckill(this) }
+  get coupon() { return new Coupon(this) }
+  get cps() { return new Cps(this) }
 }

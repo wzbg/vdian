@@ -1,10 +1,10 @@
 {
   "name": "vdian",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "微店 非官方 SDK for node.js",
   "main": "index.js",
   "scripts": {
-    "test": "node --harmony_destructuring test"
+    "test": "node test"
   },
   "author": {
     "name": "wzbg",
