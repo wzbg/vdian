@@ -2,7 +2,7 @@
 * @Author: zyc
 * @Date:   2016-04-25 15:42:54
 * @Last Modified by:   zyc
-* @Last Modified time: 2016-04-28 03:29:51
+* @Last Modified time: 2016-04-28 14:54:42
 */
 'use strict'
 
@@ -40,6 +40,7 @@ module.exports = class {
       }, result.expire_in * 999)
       return this.TOKEN = result.access_token
     }
+
     throw `${status.status_code}：${status.status_reason}`
   }
 
@@ -58,6 +59,10 @@ module.exports = class {
     const json = JSON.parse(res.body)
     const { result, status } = json
     if (!status.status_code) return result
+    if (status.status_code === 10013) { // access_token无效
+      this.TOKEN = ''
+      return this.api(param, method, version)
+    }
     throw `${status.status_code}：${status.status_reason}`
   }
 
