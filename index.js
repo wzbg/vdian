@@ -2,7 +2,7 @@
 * @Author: zyc
 * @Date:   2016-04-25 15:42:54
 * @Last Modified by:   zyc
-* @Last Modified time: 2016-04-28 14:54:42
+* @Last Modified time: 2016-04-29 13:57:16
 */
 'use strict'
 
@@ -34,13 +34,12 @@ module.exports = class {
     const json = JSON.parse(res.body)
     const { result, status } = json
     if (result && result.access_token) {
-      const self = this
-      setTimeout(() => {
-        self.TOKEN = ''
-      }, result.expire_in * 999)
+      // const self = this
+      // setTimeout(() => {
+      //   self.TOKEN = ''
+      // }, result.expire_in * 999)
       return this.TOKEN = result.access_token
     }
-
     throw `${status.status_code}：${status.status_reason}`
   }
 
