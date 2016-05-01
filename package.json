@@ -1,6 +1,6 @@
 {
   "name": "vdian",
-  "version": "0.1.1",
+  "version": "0.5.0",
   "description": "微店 非官方 SDK for node.js",
   "main": "index.js",
   "scripts": {

@@ -2,13 +2,14 @@
 * @Author: zyc
 * @Date:   2016-04-25 15:42:54
 * @Last Modified by:   zyc
-* @Last Modified time: 2016-04-29 13:57:16
+* @Last Modified time: 2016-05-01 16:20:15
 */
 'use strict'
 
 const request = require('sync-request')
 
 const Item = require('./lib/item')       // 商品API
+const Cate = require('./lib/cate')       // 商品分类API
 const Order = require('./lib/order')     // 订单API
 const Seckill = require('./lib/seckill') // 限时折扣商品 API
 const Coupon = require('./lib/coupon')   // 店铺优惠券 API
@@ -40,7 +41,7 @@ module.exports = class {
       // }, result.expire_in * 999)
       return this.TOKEN = result.access_token
     }
-    throw `${status.status_code}：${status.status_reason}`
+    throw { code: status.status_code, reason: status.status_reason }
   }
 
   api (param, method, version) {
@@ -56,16 +57,19 @@ module.exports = class {
       }
     })
     const json = JSON.parse(res.body)
-    const { result, status } = json
-    if (!status.status_code) return result
-    if (status.status_code === 10013) { // access_token无效
+    let { result, status } = json
+    status = { code: status.status_code, reason: status.status_reason }
+    if (!status.code) return result || status
+    if (status.code === 10013) { // access_token无效
       this.TOKEN = ''
       return this.api(param, method, version)
     }
-    throw `${status.status_code}：${status.status_reason}`
+    // console.error(status)
+    throw status
   }
 
   get item() { return new Item(this) }
+  get cate() { return new Cate(this) }
   get order() { return new Order(this) }
   get seckill() { return new Seckill(this) }
   get coupon() { return new Coupon(this) }
