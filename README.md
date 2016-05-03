@@ -12,6 +12,7 @@
 const Vdian = require('vdian')
 const vdian = new Vdian(APPKEY, SECRET) // 证书信息
 const itemDao = vdian.item              // 商品API
+const cateDao = vdian.cate              // 商品分类API
 const orderDao = vdian.order            // 订单API
 const seckillDao = vdian.seckill        // 限时折扣商品 API
 const couponDao = vdian.coupon          // 店铺优惠券 API
